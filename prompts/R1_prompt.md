@@ -8,10 +8,23 @@
 - Params: `level=2,3`, `depth=3–4`, `resume="specifications/R0/checkpoint.json"`, optional `runTests`
 - Resource controls: `exclude`, `fileLimit`, `timebox`
 
-## VS Code / LSP Integration
-- Use **Call Hierarchy** extensively on the public entry of each focus module.
-- Use **References** to detect inbound dependencies and fan-in hubs.
-- Use **Definition** for contracts (interfaces/types) and **DocumentSymbol** to map files.
+## Analysis Tools (deeper analysis with same tools)
+**Primary approach - Manual code reading with search support:**
+- **Trace call chains**: Use `grep` to find function calls, then recursively search for their implementations
+- **Find dependencies**: Search for `import`, `require`, `use`, `include` statements
+- **Map data structures**: Grep for type definitions, class declarations, struct definitions
+- **Track control flow**: Read code files to understand conditionals, loops, error handling
+
+**Helpful commands by language:**
+- **Go**: `grep -r "func.*MethodName"` for function definitions, `go doc` for documentation
+- **JavaScript/TypeScript**: `grep -r "function\|class\|export"` for definitions
+- **Python**: `grep -r "def\|class"` for definitions, understand decorators and imports
+- **Java**: `grep -r "public.*class\|@Override"` for key classes and methods
+
+**Optional advanced tools:**
+- VS Code LSP (if available): Call hierarchy, references, definition jumps
+- Language servers: For more precise symbol resolution
+- Static analysis tools: For more comprehensive dependency graphs
 
 ## Tasks & Checklist (R1)
 1. **Choose What to Examine Closely**

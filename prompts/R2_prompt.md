@@ -6,9 +6,22 @@
 - `repoPath`: `.`
 - Params: `level=0,1,2,3`, `resume="specifications/R1/checkpoint.json"`, optional `runTests`, `timebox` (e.g., add `tests=5m`)
 
-## VS Code / LSP Integration
-- Use Call Hierarchy and References to **validate** that each functional endpoint/command has a code counterpart.
-- Validate NFR claims using configuration/timeouts/pools/logging code evidence.
+## Analysis Tools (validation and cross-checking)
+**Primary approach - Manual cross-validation:**
+- **Verify feature-to-code mapping**: Use `grep` to confirm each documented feature has implementation
+- **Check configuration consistency**: Read config files, environment files, deployment scripts
+- **Validate NFR claims**: Search for timeout values, connection pool settings, retry logic
+- **Cross-reference documentation**: Compare code comments, README, API docs with actual implementation
+
+**Helpful validation commands:**
+- **Find configuration**: `grep -r "timeout\|pool\|retry\|limit"` in config files
+- **Check endpoints**: `grep -r "@RequestMapping\|@GetMapping\|app.get\|http.HandleFunc"` for web APIs
+- **Verify logging**: `grep -r "log\|logger\|console"` to understand monitoring
+- **Find error handling**: `grep -r "catch\|except\|panic\|recover\|error"` for error paths
+
+**Optional advanced tools:**
+- VS Code LSP (if available): For final validation of call hierarchies and references
+- Static analysis: For comprehensive dependency validation
 
 ## Tasks & Checklist (R2)
 1. **Verify Everything Connects**

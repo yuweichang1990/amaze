@@ -10,13 +10,22 @@
 ## Quick Analysis Tip (for Your Agent)
 If the codebase has many auto-detected frameworks (package.json, go.mod, pom.xml, etc.), prioritize analysis of those technologies to understand system capabilities and boundaries.
 
-## VS Code / LSP Integration (use when available)
-- `vscode.executeWorkspaceSymbolProvider` → global symbols
-- `vscode.executeDocumentSymbolProvider` → per-file symbol trees
-- `vscode.executeDefinitionProvider` → definition jumps
-- `vscode.executeReferenceProvider` → reverse references (fan-in)
-- `vscode.prepareCallHierarchy`, `vscode.provideCallHierarchyIncomingCalls`, `vscode.provideCallHierarchyOutgoingCalls` → **call hierarchy**
-- Fallback: ripgrep/ctags/tsserver/gopls/pyright
+## Analysis Tools (use appropriate tools for the language/framework)
+**Primary approach - Static analysis with simple tools:**
+- **File structure analysis**: Use `find`, `ls`, `tree` to understand directory organization
+- **Text search**: Use `grep`, `ripgrep`, or `ag` to find patterns, imports, function definitions
+- **Symbol extraction**: Use language-agnostic tools like `ctags` or `universal-ctags`
+- **Git history**: Use `git log`, `git blame` to identify frequently modified files
+
+**Language-specific tools (optional, when needed):**
+- **Go**: `go list`, `go doc`, or simple grep for `func` definitions
+- **JavaScript/TypeScript**: grep for `function`, `class`, `export`, or use `jq` for package.json
+- **Python**: grep for `def`, `class`, or basic ast parsing
+- **Java**: grep for `public class`, `@Controller`, `@Service`
+
+**Advanced tools (optional):**
+- VS Code LSP features if available: call hierarchy, symbol providers
+- Language servers: tsserver, gopls, pyright (if already configured)
 
 ## Tasks & Checklist (R0)
 1. **Map the System Structure**

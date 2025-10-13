@@ -1,6 +1,6 @@
-# Reverse Analyze Prompts (R×L, VS Code–aware)
+# Reverse Analyze Prompts (R×L)
 
-English prompt templates for AI coding agents to **reverse-engineer** an existing codebase across **three rounds (R0–R2)**, with VS Code / LSP call hierarchy integration and clear **Inputs/Outputs** per round.
+English prompt templates for AI coding agents to **reverse-engineer** an existing codebase across **three rounds (R0–R2)**, using simple static analysis tools with clear **Inputs/Outputs** per round.
 
 - **R0 – Global Coarse Pass** (default L2 / depth=2): fast static scan, build symbol index, discover entrypoints, major modules, and bases like cross-cutting features.
 - **R1 – Focused Deepening** (L2+L3 / depth=3–4): deepen 1–3 focus modules, produce code map, call chains, and types.
@@ -13,7 +13,7 @@ English prompt templates for AI coding agents to **reverse-engineer** an existin
 ## Features
 - ⚡ **Static-only by default**: Safe analysis without running code or tests.
 - 🔄 **Adaptive iteration**: Quality gates enable smart re-analysis when needed.
-- 🏗️ **VS Code integration**: Uses LSP for precise call hierarchy and symbol analysis.
+- 🛠️ **Simple tools first**: Uses basic tools (grep, find, ctags) for accessibility; LSP optional for advanced use.
 - 📊 **Multi-level architecture**: C4-like documentation from L0 strategic to L3 code details.
 - 🧩 **Replaceable agents**: Works with any AI agent, not locked to specific tools.
 - 📈 **Legacy-aware**: Special focus on understanding modification patterns in mature codebases.
