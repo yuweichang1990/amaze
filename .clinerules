@@ -1,0 +1,90 @@
+# Reverse Engineering Analysis Rules for Cline
+# Place this file in your project root directory to enable reverse engineering capabilities
+
+[tools]
+# Enable essential tools for reverse engineering
+run_terminal_cmd = true
+grep_search = true
+list_dir = true
+read_file = true
+search_replace = true
+# Additional analysis tools
+run_terminal_cmd = true
+grep_search = true
+
+[rules]
+# Core safety rules for reverse engineering
+no_build_unless_explicit = true  # Never run build commands unless --run-tests flag is set
+no_test_execution = true         # No automatic test execution
+only_static_analysis = true      # Prefer static analysis over runtime inspection
+
+# Output organization
+create_specifications_directly = true  # Create specifications folder directly when doing analysis
+respect_file_limits = true             # Honor --file-limit and --max-file-size parameters
+
+# Template integration
+load_templates_from = "./prompts/"     # Path to reverse engineering templates
+output_directory = "./specifications/" # Where to write analysis results
+
+[slash-commands]
+# Main reverse engineering command with all supported parameters
+reverse-analyze = """
+Parameter mapping for reverse engineering analysis:
+
+--repo <path>                    => Target repository path (default: ".")
+--round <0|1|2>                  => Analysis round: 0=R0(global), 1=R1(focused), 2=R2(convergence)
+--level <levels>                 => C4 levels to analyze (0=context,1=container,2=component,3=code)
+--focus <modules>                => Comma-separated list of modules to focus on (R1+)
+--depth <number>                 => Call chain analysis depth (default: 2 for R0, 3-4 for R1+)
+--exclude <patterns>             => Glob patterns to exclude (default: common exclusions)
+--file-limit <number>            => Maximum files to analyze (default: 8000)
+--max-file-size <size>           => Maximum file size (default: 1.5MB)
+--timebox <limits>               => Time limits per phase (e.g., "structure=10m,api=10m")
+--run-tests <boolean>            => Enable minimal testing (default: false)
+--resume <checkpoint>            => Resume from previous analysis checkpoint
+--read-only <boolean>            => Analysis only, no source modifications (default: true)
+--output <path>                  => Output directory (default: "./specifications")
+
+Usage examples in prompts:
+- Basic scan: --round 0 --repo .
+- Focused analysis: --round 1 --focus "auth,payment" --depth 3
+- Resume analysis: --round 1 --focus "problematic" --resume "specifications/R2/checkpoint.json"
+"""
+
+[behavior]
+# Guidance for when reverse engineering is appropriate
+use_reverse_analysis_for = """
+- Understanding legacy codebases
+- Documenting system architecture
+- Planning refactoring or modernization
+- Identifying modification risks
+- Onboarding new developers
+- Assessing system complexity
+"""
+
+# When NOT to use reverse engineering
+avoid_reverse_analysis_for = """
+- Writing new code (use normal coding workflow)
+- Debugging runtime issues (use debugging tools)
+- Performance monitoring (use profilers)
+- Security scanning (use security tools)
+"""
+
+# Quality assurance
+always_include_confidence = true      # Mark analysis confidence levels
+track_assumptions = true              # Document analysis assumptions
+validate_findings = true              # Cross-reference findings between rounds
+
+[template-integration]
+# How Cline should read and use the reverse engineering templates
+template_folder = "./prompts/"
+template_files = ["R0_prompt.md", "R1_prompt.md", "R2_prompt.md"]
+
+read_templates_before_analysis = true
+prompt_user_for_round_selection = true
+automatically_load_parameters = true
+
+# Template guidance mapping
+R0_template = "Global coarse analysis - identify structure and modules"
+R1_template = "Focused deep analysis - examine selected modules in detail"
+R2_template = "Convergence and validation - cross-check all findings and next steps"
