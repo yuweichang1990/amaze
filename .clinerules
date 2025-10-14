@@ -27,28 +27,67 @@ load_templates_from = "./prompts/"     # Path to reverse engineering templates
 output_directory = "./specifications/" # Where to write analysis results
 
 [slash-commands]
-# Main reverse engineering command with all supported parameters
+# FrontierExplorer Commands - Dynamic exploration system
 reverse-analyze = """
-Parameter mapping for reverse engineering analysis:
+Parameter mapping for FrontierExplorer analysis:
 
+CORE PARAMETERS:
 --repo <path>                    => Target repository path (default: ".")
---round <0|1|2>                  => Analysis round: 0=R0(global), 1=R1(focused), 2=R2(convergence)
---level <levels>                 => C4 levels to analyze (0=context,1=container,2=component,3=code)
---focus <modules>                => Comma-separated list of modules to focus on (R1+)
---depth <number>                 => Call chain analysis depth (default: 2 for R0, 3-4 for R1+)
+--workflow <workflow>            => Complete agent workflows:
+                                    bootstrap   = Initial system skeleton exploration
+                                    expand      = Continue exploration based on frontier
+                                    converge    = Final validation and documentation
+
+AGENT PARAMETERS:
+--agent <role>                   => Direct agent execution roles:
+                                    explorer    = Discover system skeleton & boundaries
+                                    reflector   = Assess confidence & identify gaps
+                                    curator     = Integrate findings & manage frontier
+
+STRATEGY PARAMETERS:
+--strategy <strategy>            => Exploration strategies (auto-selected if not specified):
+                                    Bootstrap       = Start from system boundaries
+                                    CoverageDriven  = Fill understanding gaps
+                                    PriorityBased   = Focus on high-value areas
+                                    RiskFocused     = Address high-risk components
+
+TARGETING PARAMETERS:
+--target <specific_target>        => Focus on specific element (file/module/class)
+                                    Examples: "pkg/auth", "main.go", "SERVICE_USER_001"
+
+FRONTIER PARAMETERS:
+--resume <state_file>            => Resume from frontier state file
+                                    Path: specifications/memory/frontier/active_frontier.md
+
+LEGACY SUPPORT PARAMETERS:
+--round <0|1|2>                  => Legacy round-based analysis (deprecated)
+                                    Maps to workflows for backward compatibility
+
+QUALITY CONTROL PARAMETERS:
+--confidence-threshold <0.0-1.0> => Minimum confidence filter (default: 0.6)
+--depth <shallow|medium|deep>    => Analysis depth level
 --exclude <patterns>             => Glob patterns to exclude (default: common exclusions)
 --file-limit <number>            => Maximum files to analyze (default: 8000)
---max-file-size <size>           => Maximum file size (default: 1.5MB)
---timebox <limits>               => Time limits per phase (e.g., "structure=10m,api=10m")
---run-tests <boolean>            => Enable minimal testing (default: false)
---resume <checkpoint>            => Resume from previous analysis checkpoint
---read-only <boolean>            => Analysis only, no source modifications (default: true)
+--timebox <limits>               => Time limits per phase (e.g., "structure=10m")
+--read-only <boolean>            => Analysis only, no modifications (default: true)
 --output <path>                  => Output directory (default: "./specifications")
 
-Usage examples in prompts:
-- Basic scan: --round 0 --repo .
-- Focused analysis: --round 1 --focus "auth,payment" --depth 3
-- Resume analysis: --round 1 --focus "problematic" --resume "specifications/R2/checkpoint.json"
+USAGE EXAMPLES:
+
+# Bootstrap new project exploration
+/reverse-analyze --workflow bootstrap --repo ./my-project
+
+# Continue exploration from last state
+/reverse-analyze --workflow expand --resume "specifications/memory/frontier/active_frontier.md"
+
+# Direct agent execution - targeted analysis
+/reverse-analyze --agent explorer --target "pkg/auth" --repo ./my-project
+
+# Strategy-driven exploration - focus on high-risk areas
+/reverse-analyze --strategy RiskFocused --repo ./my-project
+
+# Legacy compatibility
+/reverse-analyze --round 0 --repo ./my-project  # Maps to bootstrap workflow
 """
 
 [behavior]
