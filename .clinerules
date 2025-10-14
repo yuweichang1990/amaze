@@ -76,15 +76,48 @@ track_assumptions = true              # Document analysis assumptions
 validate_findings = true              # Cross-reference findings between rounds
 
 [template-integration]
-# How Cline should read and use the reverse engineering templates
+# Enhanced template system for Frontier-Based Exploration
 template_folder = "./prompts/"
-template_files = ["R0_prompt.md", "R1_prompt.md", "R2_prompt.md"]
+core_roles = ["roles/explorer_skeleton_discovery.md", "roles/reflector_confidence_assessment.md", "roles/curator_frontier_management.md"]
+workflows = ["workflows/bootstrap_exploration.md"]
+memory_schema = "memory/memory_schema_and_formats.md"
 
 read_templates_before_analysis = true
-prompt_user_for_round_selection = true
-automatically_load_parameters = true
+dynamic_workflow_selection = true      # Choose workflow based on exploration state
+agent_role_assignment = true           # Assign appropriate agent for each analysis step
 
-# Template guidance mapping
-R0_template = "Global coarse analysis - identify structure and modules"
-R1_template = "Focused deep analysis - examine selected modules in detail"
-R2_template = "Convergence and validation - cross-check all findings and next steps"
+# Template guidance mapping - Now role-based instead of round-based
+explorer_role = "Discovery agent - finds system skeleton and boundaries"
+reflector_role = "Quality assurance - assesses confidence and identifies gaps"
+curator_role = "Knowledge integration - maintains exploration frontier and memory"
+bootstrap_workflow = "Initial exploration - establish foundational understanding"
+memory_system = "Structured knowledge storage and retrieval system"
+
+[frontier-system]
+# New frontier-based exploration configuration
+dynamic_phase_transitions = true       # Allow flexible phase movement instead of fixed R0-R2
+agent_coordination = true              # Enable Explorer→Reflector→Curator workflow
+memory_driven_decisions = true         # Use confidence scoring for exploration direction
+frontier_aware_expansion = true        # Track exploration boundaries intelligently
+
+# Context management
+incremental_knowledge_building = true  # Build understanding progressively
+confidence_driven_prioritization = true # Focus on high-value, low-confidence areas
+frontier_conciousness = true           # Always aware of exploration boundaries
+adaptive_technique_selection = true    # Switch techniques based on situation
+
+# Memory system configuration
+structured_memory_format = true        # Use YAML frontmatter for all memory entries
+memory_consistency_validation = true   # Ensure accumulated knowledge coherence
+relationship_tracking = true          # Maintain element interconnections
+evidence_chain_preservation = true    # Track confidence justification over time
+
+[strategies]
+# Automatic strategy selection based on exploration context
+exploration_strategies = ["Bootstrap", "CoverageDriven", "PriorityBased", "RiskFocused"]
+strategy_selection_logic = """
+- Bootstrap: When memory is empty or very sparse (<5 elements)
+- CoverageDriven: When overall confidence distribution is uneven (<60% avg confidence)
+- PriorityBased: When clear value differences exist (importance variance >0.3)
+- RiskFocused: When high-risk elements dominate frontier (risk_score >0.7)
+"""

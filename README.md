@@ -1,139 +1,287 @@
-# Reverse Analyze Prompts (R×L)
+# FrontierExplorer - Dynamic Code Architecture Exploration
 
-English prompt templates for AI coding agents to **reverse-engineer** an existing codebase across **three rounds (R0–R2)**, using simple static analysis tools with clear **Inputs/Outputs** per round.
+A Frontier-Based reverse engineering system that incrementally explores codebases through AI agent coordination. Unlike traditional fixed-round approaches, FrontierExplorer uses confidence-driven exploration with intelligent frontier management.
 
-- **R0 – Global Coarse Pass** (default L2 / depth=2): fast static scan, build symbol index, discover entrypoints, major modules, and bases like cross-cutting features.
-- **R1 – Focused Deepening** (L2+L3 / depth=3–4): deepen 1–3 focus modules, produce code map, call chains, and types.
-- **R2 – Convergence** (L0–L3 cross-check): align functional, non-functional, and architecture docs into a final deliverable.
+## Overview
 
-> Safe default: **no build / no tests**. Only run minimal smoke tests in a trusted sandbox or when `--run-tests` is explicitly enabled.
+FrontierExplorer replaces rigid R0→R1→R2 rounds with a dynamic exploration framework:
 
-**Adaptive Analysis**: Intelligent framework that iteratively refines understanding. R2 quality gates validate findings and guide smart re-analysis when new insights emerge, ensuring comprehensive codebase comprehension without redundant work.
+- **🗺️ Frontier-Based**: Like exploring an unknown territory, systematically mapping unexplored regions
+- **🎯 Confidence-Driven**: Prioritizing high-value, low-confidence areas for maximum insight efficiency
+- **🤖 Agent Coordination**: Explorer→Reflector→Curator workflow with incremental memory building
+- **📊 Memory System**: Structured knowledge accumulation without context collapse
 
-## Features
-- ⚡ **Static-only by default**: Safe analysis without running code or tests.
-- 🔄 **Adaptive iteration**: Quality gates enable smart re-analysis when needed.
-- 🛠️ **Simple tools first**: Uses basic tools (grep, find, ctags) for accessibility; LSP optional for advanced use.
-- 📊 **Multi-level architecture**: C4-like documentation from L0 strategic to L3 code details.
-- 🧩 **Replaceable agents**: Works with any AI agent, not locked to specific tools.
-- 📈 **Legacy-aware**: Special focus on understanding modification patterns in mature codebases.
-- ⏱️ **Scalable performance**: Configurable depth limits and file exclusions for large projects.
-- ✅ **Quality tracking**: Confidence scoring and assumption validation throughout.
+## Core Architecture
 
-## Quick Start
-1. Download and unzip.
-2. Open `prompts/R0_prompt.md` in your AI agent or chat interface.
-3. Paste the prompt: `/reverse-analyze --round 0 --repo .` (or equivalent command).
-4. Review `specifications/R0/*`, pick 1–3 **focus modules** from the R0 report.
-5. Run **R1**: `/reverse-analyze --round 1 --focus "chosen_modules"`
-6. Run **R2**: `/reverse-analyze --round 2` (follows any iteration guidance from R2 output).
+### Three Agent Roles
 
-> **For different AI agents**: Configure your agent to read files from `prompts/` folder and enable slash commands. Each agent platform handles tool configuration differently. See `docs/SlashCommand.md` for suggested parameters and iteration examples. For Cline-specific setup, see Agent Configuration section below.
+#### 🔍 **Explorer** (Discovery Agent)
+- Discovers system skeleton: entrypoints, components, boundaries
+- Maps structural connections and cross-cutting concerns
+- Records findings in structured memory format
+- Identifies frontier expansion opportunities
 
-## Folder Structure
-- `prompts/`
-  - `R0_prompt.md`
-  - `R1_prompt.md`
-  - `R2_prompt.md`
-- `docs/`
-  - `SlashCommand.md`
-  - `Parameters.md`
+#### 🔎 **Reflector** (Quality Assurance Agent)
+- Assesses confidence levels and evidence strength
+- Identifies gaps, inconsistencies, and assumptions
+- Provides risk analysis and validation requirements
+- Recommends next exploration priorities
 
-## Real-World Examples
+#### 🧠 **Curator** (Knowledge Integration Agent)
+- Integrates findings into coherent system understanding
+- Manages exploration frontier and priority queues
+- Ensures memory consistency and relationship tracking
+- Guides strategic direction and phase transitions
 
-### Basic Analysis
-```
-/reverse-analyze --round 0 --repo /path/to/project
+## How It Works
+
+### Bootstrap Phase (Initial Exploration)
+```mermaid
+graph LR
+    A[Clean Repository] --> B[Explorer: Skeleton Discovery]
+    B --> C[Reflector: Confidence Assessment]
+    C --> D[Curator: Memory Integration]
+    D --> E[Frontier Established]
 ```
 
-### Focused Analysis
+1. **Explorer** discovers system boundaries, entrypoints, major components
+2. **Reflector** evaluates quality and identifies gaps
+3. **Curator** establishes exploration frontier and priority targets
+
+### Expansion Phase (Iterative Deepening)
+```mermaid
+graph TD
+    A[Known Frontier] --> B{Confidence Check}
+    B -->|Low Confidence| C[Targeted Re-exploration]
+    B -->|High Confidence| D[Select Next Target]
+    D --> E[Explorer Dive]
+    E --> F[Reflector Assessment]
+    F --> G[Curator Integration]
+    G --> H[Expand Frontier]
+    H --> B
 ```
-/reverse-analyze --round 1 --focus "api,service" --depth 3
+
+System continuously:
+- Selects highest-value unexplored regions based on importance × uncertainty
+- Explores targeted areas with appropriate depth
+- Updates confidence levels and frontier boundaries
+- Adapts strategy based on emerging patterns
+
+## Starting Exploration
+
+### Basic Bootstrap
+```
+/reverse-analyze --workflow bootstrap --repo .
 ```
 
-### Advanced Analysis with Time Limits
-```
-/reverse-analyze --round 2 --timebox "structure=15m,analysis=20m" --run-tests
-```
+This performs the complete agent coordination cycle for initial system understanding.
 
-### Iterative Re-analysis (from R2 guidance)
+### Advanced Usage
 ```
-/reverse-analyze --round 1 --focus "problematic_module" --resume "specifications/R2/checkpoint.json"
+/reverse-analyze --agent explorer --target "specific_module"
+# Direct agent invocation for targeted analysis
 ```
 
-## Validation Checklist ✅
+## Memory System
 
-Before starting analysis, verify:
-- [ ] Target directory contains source code (not just config files)
-- [ ] Your agent has file system access to the project
-- [ ] Code is in a compilable state (if `--run-tests` will be used)
-- [ ] No exotic build systems (gradle/maven/npm/pip/poetry are well-supported)
+### Structured Storage Format
+All findings stored in YAML-frontmatter Markdown for optimal human-AI collaboration:
 
-During analysis, monitor:
-- [ ] Progress checkpoints appear for long-running rounds
-- [ ] Confidence levels are assigned to critical findings
-- [ ] Assumptions are tracked and validated
-- [ ] Quality gates pass before final delivery
+```yaml
+---
+entry_id: "SKELETON_COMPONENT_USER_SERVICE_001"
+timestamp: "2025-10-14T22:00:00Z"
+agent: "explorer"
+confidence: "high"
+phase: "skeleton_discovery"
+---
 
-## Common Troubleshooting
+## Component Summary
+Discovered user authentication service with JWT validation...
 
-### Analysis Takes Too Long
-- **Reduce depth**: `--depth 1` for faster scanning
-- **Increase file limits**: `--file-limit 20000` if system is fast
-- **Timebox phases**: `--timebox "r0=5m,r1=10m"` to control duration
+## Connections
+- Connects to: Database boundary
+- Called by: API controllers
+- Cross-cuts: Security middleware
+```
 
-### Getting Incomplete Results
-- **Check exclusion filters**: `--exclude "test/**,tmp/**"` may exclude important code
-- **Adjust recursion limits**: `--depth 4` if analysis seems shallow
-- **Resume from checkpoint**: `--resume specifications/R0/checkpoint.json` on interrupted runs
+### Memory Organization
+```
+specifications/memory/
+├── sessions/           # Exploration session logs
+├── elements/          # Individual findings
+│   ├── skeleton/      # Structural elements
+│   ├── component/     # Implementation components
+│   ├── assessment/    # Quality evaluations
+│   └── integration/   # Synthesized knowledge
+├── frontier/          # Current exploration state
+│   ├── active_frontier.md
+│   ├── confidence_heatmap.md
+│   └── exploration_queue.md
+└── schemas/           # Format definitions
+```
 
-### Quality Issues
-- **Low confidence findings**: Use `--depth 3` or R1 re-analysis with specific focus modules
-- **Architecture misalignments**: Follow R2 iteration guidance to correct foundational assumptions
-- **Missing connections**: Check if `--run-tests` flag provides additional validation
+## Exploration Strategies
 
-## Contributing 🤝
+### Automatic Strategy Selection
+- **Bootstrap**: Initial discovery when knowledge is sparse
+- **Coverage**: Fill understanding gaps when confidence distribution is uneven
+- **Priority**: Focus on high-importance areas with clear value propositions
+- **Risk**: Address high-risk components that could cause system failures
 
-### Adding New Analysis Patterns
-- Test prompts on diverse codebases (open source projects of varying sizes)
-- Document assumptions and limitations clearly
-- Include confidence scoring for findings
+### Adaptive Depth Control
+- **Shallow**: Boundary mapping and interface discovery
+- **Medium**: Component relationships and data flows
+- **Deep**: Implementation details and contract verification
 
-### Improving Templates
-- Focus on making analysis more reliable, not just comprehensive
-- Add validation steps within prompts when possible
-- Consider agent cognitive load when adding complexity
+## Command Reference
 
-### Reporting Issues
-- Include the full command used and codebase type
-- Specify which round failed and what error symptoms appeared
-- Note agent type and version if applicable
+### Core Commands
 
-## Agent Configuration Examples
+```bash
+# Bootstrap new repository exploration
+/reverse-analyze --workflow bootstrap
 
-### For Cline (VS Code Extension)
-1. **Copy Configuration File**: Copy the included `.clinerules` file to your project root directory. This file contains:
-   - Pre-configured tool settings for reverse engineering tasks
-   - `/reverse-analyze` slash command with all supported parameters
-   - Safety rules and behavior guidelines
-   - Template integration settings
+# Continue exploration with frontier management
+/reverse-analyze --workflow expand
 
-2. **Verify Tools**: The `.clinerules` file enables essential tools. Confirm these are available in your Cline installation:
-   - `run_terminal_cmd` - For executing analysis commands
-   - `grep_search` - For fallback code searching when LSP is unavailable
-   - `read_file`, `list_dir` - For reading templates and project files
-   - Add any project-specific tools as needed
+# Direct agent invocation
+/reverse-analyze --agent explorer --target "api/routes.go"
+/reverse-analyze --agent reflector --target "USER_SERVICE_001"
+/reverse-analyze --agent curator --action "integrate_session"
 
-3. **Working Directory**: Cline will use your project root as the working directory for `run_terminal_cmd` operations.
+# Resume interrupted exploration
+/reverse-analyze --resume "specifications/memory/frontier/active_frontier.md"
+```
 
-> **One-Click Setup**: Simply copy `.clinerules` to your project root - no manual configuration needed!
+### Advanced Parameters
 
-### For Other AI Agents
-- **GitHub Copilot Chat**: Use the prompt content directly in chat interface or create workspace custom instructions
-- **Claude Desktop**: Configure as a tool and point to the `prompts/` folder
-- **Custom Agents**: Implement file reading and command execution capabilities, then load templates from the `prompts/` folder
+| Parameter | Description | Default | Example |
+|-----------|-------------|---------|---------|
+| `--workflow` | Complete workflows | auto | `--workflow bootstrap` |
+| `--agent` | Specific agent role | auto | `--agent explorer` |
+| `--target` | Focus target | auto | `--target "auth_service"` |
+| `--strategy` | Exploration strategy | auto | `--strategy RiskFocused` |
+| `--depth` | Analysis depth | adaptive | `--depth medium` |
+| `--resume` | Continue from state | - | `--resume "path/to/state.md"` |
+| `--confidence-threshold` | Min confidence filter | 0.6 | `--confidence-threshold 0.8` |
 
-> **Note**: Template files in `prompts/` are designed to be agent-agnostic. They contain pure analysis logic without platform-specific references. Agent-specific configurations (like slash commands) are handled separately in your agent platform's configuration.
+## Quality Assurance Framework
 
-## License
-MIT
+### Confidence Scoring
+- **High (0.8-1.0)**: Strong evidence, multiple sources, architecturally sound
+- **Medium (0.5-0.7)**: Reasonable evidence, some gaps, plausible conclusions
+- **Low (0.0-0.4)**: Weak evidence, significant assumptions, needs verification
+
+### Quality Metrics
+- **Coverage**: Percentage of codebase elements understood
+- **Confidence**: Average confidence across critical paths
+- **Consistency**: Agreement between related findings
+- **Frontier Clarity**: Clear distinction between known and unknown
+
+## Benefits Over Traditional Round-Based Systems
+
+### 🚀 **Flexibility**
+- **Dynamic Depth**: Adjust exploration level based on needs, not fixed rounds
+- **Adaptive Strategy**: Switch approaches based on emerging system patterns
+- **Human-in-Loop**: Critical decisions can involve human expertise
+
+### 🎯 **Efficiency**
+- **Intelligence Focus**: Prioritize high-value areas automatically
+- **Memory Reuse**: Build upon previous findings without re-exploration
+- **Confidence Optimization**: Avoid over-analyzing well-understood areas
+
+### 🧠 **Quality**
+- **Continuous Validation**: Ongoing quality assessment, not just final rounds
+- **Gap Awareness**: Systematic identification and filling of knowledge holes
+- **Consistency Tracking**: Cross-validation of related discoveries
+
+### 📈 **Human-Friendly**
+- **Incremental Results**: Deliver useful insights early and often
+- **Explainable Process**: Clear rationale for exploration decisions
+- **Collaborative**: Human experts can guide, override, and contribute
+
+## Use Cases
+
+### ✅ **When to Use FrontierExplorer**
+
+- Understanding complex legacy codebases with unclear architecture
+- Onboarding new team members with targeted knowledge building
+- Risk assessment for proposed changes in critical systems
+- Documentation projects requiring systematic code comprehension
+- Modernization planning needing complete system understanding
+
+### ❌ **When NOT to Use**
+
+- Simple codebases with obvious structure (use basic tools)
+- Time-critical debugging (use debugging tools)
+- Performance optimization (use profiling tools)
+- Security audits (use specialized security tools)
+
+## Architecture Patterns Discovered
+
+The system is particularly effective at recognizing:
+
+### ✅ **Well Detected**
+- **Layered Architecture**: Clear separation of concerns
+- **MVC Patterns**: Controller/service/repository structures
+- **Microservices**: Service boundaries and communication patterns
+- **Event-Driven**: Message flows and event handling
+
+### ⚠️ **Requires Attention**
+- **Big Ball of Mud**: Monolithic structures with unclear boundaries
+- **Scattered Cross-Cutting**: Pervasive concerns without clear boundaries
+- **Mixed Paradigms**: Inconsistent architectural patterns
+- **High Coupling**: Tight interconnections creating change risk
+
+## Configuration
+
+### .clinerules Integration
+The system integrates with Cline's `.clinerules` configuration:
+
+```ini
+[frontier-system]
+dynamic_phase_transitions = true
+agent_coordination = true
+memory_driven_decisions = true
+
+[strategies]
+exploration_strategies = ["Bootstrap", "CoverageDriven", "PriorityBased", "RiskFocused"]
+```
+
+### Output Structure Evolution
+```
+specifications/
+├── memory/              # Incremental knowledge base
+│   ├── sessions/        # Phase records
+│   ├── elements/        # Component knowledge
+│   └── frontier/        # Exploration state
+├── analysis/            # Derived insights
+│   ├── architecture_overview.md
+│   ├── confidence_assessment.md
+│   └── exploration_log.md
+└── deliverables/         # Final outputs when ready
+    ├── system_architecture.md
+    └── recommendations.md
+```
+
+## Getting Started
+
+1. **Install**: No additional tools required (uses existing CLI tools)
+2. **Configure**: Drop `.clinerules` in your project root
+3. **Bootstrap**: `/reverse-analyze --workflow bootstrap`
+4. **Explore**: Let the agents guide systematic discovery
+5. **Document**: Use accumulated knowledge for your project needs
+
+## Philosophy
+
+> **"Explore intelligently, document incrementally, understand deeply"**
+
+FrontierExplorer treats codebase understanding as a systematic exploration problem rather than a documentation exercise. By maintaining clear frontiers between known and unknown territory, preserving confidence levels, and enabling strategic human-AI collaboration, it provides a framework for truly mastering complex systems.
+
+---
+
+**Ready to start?**
+
+```
+/reverse-analyze --round 0 --repo .
