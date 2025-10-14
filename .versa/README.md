@@ -284,4 +284,4 @@ Versa treats codebase understanding as a systematic exploration problem rather t
 **Ready to start?**
 
 ```
-/reverse-analyze --workflow bootstrap --repo .
+/reverse-analyze.md --workflow bootstrap --repo .

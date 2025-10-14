@@ -284,4 +284,4 @@ Versa 將程式碼理解從文件練習轉變為系統性探索問題。透過�
 **準備開始了嗎？**
 
 ```bash
-/reverse-analyze --workflow bootstrap --repo .
+/reverse-analyze.md --workflow bootstrap --repo .
