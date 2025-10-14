@@ -100,6 +100,24 @@ Always end output with frontier suggestions:
 2. **High-confidence expansions** - strengthen known components
 3. **Gap-filling opportunities** - areas with low confidence
 
+## Output Generation Strategy
+
+### For Small Projects (< 5 files, < 500 lines)
+- Generate concise README-style summary immediately
+- Skip complex YAML memory format for component details
+- Focus on practical understanding over systematic documentation
+- Structure summary as: Overview → Architecture → Components → File Guide
+
+### For Medium Projects (5-20 files, 500-5000 lines)
+- Use standard memory format for important elements
+- Generate phase summary reports
+- Balance detail with readability
+
+### For Large Projects (>20 files, >5000 lines)
+- Full FrontierExplorer workflow with memory persistence
+- Multi-phase analysis with frontier management
+- Comprehensive documentation generation
+
 ## Validation Checkpoints
 
 Before completing:
@@ -108,6 +126,7 @@ Before completing:
 - [ ] Major component interconnections documented
 - [ ] Cross-cutting concerns identified
 - [ ] Next frontier targets suggested
+- [ ] **NEW**: Project scale-appropriate output generated
 
 ## Success Criteria
 - System skeleton is structurally understood
@@ -115,3 +134,4 @@ Before completing:
 - Exploration frontier is clearly defined
 - No component is completely unknown
 - Confidence high enough to drive next phase
+- **NEW**: Deliverables match project complexity and user needs

@@ -3,10 +3,40 @@
 ## Overview
 This workflow coordinates the initial exploration session where no prior knowledge exists. It orchestrates Explorer, Reflector, and Curator agents to establish the foundational understanding of the codebase.
 
+## Project Scale Assessment (First Step)
+
+### Automatic Scale Determination
+**Before any exploration begins:**
+1. Count total source files in target directory
+2. Estimate total lines of code across files
+3. Assess technology stack complexity
+4. Evaluate domain/business logic complexity
+
+### Strategy Selection Matrix
+| Scale | Criteria | Approach | Output |
+|-------|----------|----------|--------|
+| Tiny | <3 files, <100 loc | Direct summary | README-style report |
+| Small | <5 files, <500 loc | Simple analysis | Summary + basic component docs |
+| Medium | 5-20 files, 500-5000 loc | Standard workflow | Full memory + reports |
+| Large | >20 files, >5000 loc | Complex workflow | Multi-phase analysis |
+
+### Scale-Adaptive Time Allocation
+- Tiny: 2-5 minutes
+- Small: 5-15 minutes
+- Medium: 15-45 minutes
+- Large: 45-120 minutes
+
 ## Workflow Phases
 
-### Phase 1: Initial Exploration (20 minutes)
+### Phase 1: Initial Exploration (Scale-dependent)
 **Agent: Explorer**
+
+#### For Small Projects (strategy selection based on scale assessment above)
+- Use `simple_project_analyzer.md` template
+- Generate immediate project overview report
+- Skip complex memory system for rapid understanding
+
+#### For Medium/Large Projects (standard workflow)
 - Execute skeleton discovery using `explorer_skeleton_discovery.md`
 - Target: Complete system skeleton mapping
 - Deliverable: Multiple skeleton element entries
@@ -16,6 +46,7 @@ This workflow coordinates the initial exploration session where no prior knowled
 - System boundaries detected
 - Major components mapped
 - Cross-cutting concerns noted
+- **Simple projects**: Readable overview generated immediately
 
 ### Phase 2: Quality Assessment (15 minutes)
 **Agent: Reflector**
