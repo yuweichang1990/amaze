@@ -1,4 +1,4 @@
-# FrontierExplorer Reverse Analysis Workflow
+# Versa Reverse Analysis Workflow
 
 This workflow performs intelligent code architecture exploration using frontier-based techniques with AI agent coordination.
 
@@ -60,9 +60,7 @@ Execute systematic code architecture exploration that goes beyond traditional st
   - `medium`: Component relationships (balanced)
   - `deep`: Implementation details and contracts (slow, detailed)
 
-### LEGACY COMPATIBILITY
-- `--round <0|1|2>`: Legacy round-based mode (deprecated)
-  - Maps to new workflow types for backward compatibility
+
 
 ### ADDITIONAL PARAMETERS
 - `--exclude <patterns>`: Glob patterns to exclude from analysis
@@ -192,7 +190,6 @@ specifications/artifacts/
 
 ### FALLBACK MODES
 - **Simple Mode**: Use `--depth shallow` for basic structural mapping
-- **Legacy Mode**: Use `--round` parameters to fall back to traditional analysis
 - **Conservative Mode**: Increase `--confidence-threshold` to avoid unreliable discoveries
 
 ## Integration Points

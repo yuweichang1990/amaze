@@ -1,10 +1,10 @@
-# FrontierExplorer - Code Analysis Rules for Cline
+# Versa - Code Analysis Rules for Cline
 
-This directory contains Cline-specific rules and workflows for FrontierExplorer, a dynamic code architecture exploration system.
+This directory contains Cline-specific rules and workflows for Versa, a dynamic code architecture exploration system.
 
 ## Overview
 
-FrontierExplorer replaces fixed round-based analysis (R0→R1→R2) with intelligent frontier-based exploration using three AI agents:
+Versa use intelligent frontier-based exploration using three AI agents:
 
 - **Explorer**: Discovers system skeleton and boundaries
 - **Reflector**: Assesses confidence and identifies gaps
@@ -21,7 +21,7 @@ FrontierExplorer replaces fixed round-based analysis (R0→R1→R2) with intelli
 ### Output Management
 - **Structured specifications**: Create folder hierarchy under `specifications/`
 - **Memory persistence**: Incremental knowledge storage in `specifications/memory/`
-- **Template integration**: Use prompts from `prompts/` directory
+- **Template integration**: Use prompts from `../.versa/prompts/` directory
 - **Confidence tracking**: All findings include evidence-based confidence scores
 
 ### Exploration Philosophy
@@ -89,17 +89,17 @@ Defined in: `workflows/reverse-analyze.md`
 ## Template System
 
 ### Role Templates
-Located in `../prompts/roles/`:
+Located in `../.versa/prompts/roles/`:
 - `explorer_skeleton_discovery.md`: Entry point and boundary discovery
 - `reflector_confidence_assessment.md`: Quality evaluation and gap analysis
 - `curator_frontier_management.md`: Knowledge integration
 
 ### Workflow Templates
-Located in `../prompts/workflows/`:
+Located in `../.versa/prompts/workflows/`:
 - `bootstrap_exploration.md`: Complete initial exploration cycle
 
 ### Memory Schema
-Located in `../prompts/memory/`:
+Located in `../.versa/prompts/memory/`:
 - `memory_schema_and_formats.md`: Structured storage formats and relationships
 
 ## Quality Assurance
@@ -193,4 +193,4 @@ specifications/
 
 > **"Explore with intelligence, document incrementally, understand completely."**
 
-FrontierExplorer transforms code comprehension from a rigid, time-consuming process into an intelligent, adaptive exploration experience. Through AI agent coordination and sophisticated memory management, it maximizes understanding efficiency while maintaining human oversight and control.
+Versa transforms code comprehension from a rigid, time-consuming process into an intelligent, adaptive exploration experience. Through AI agent coordination and sophisticated memory management, it maximizes understanding efficiency while maintaining human oversight and control.

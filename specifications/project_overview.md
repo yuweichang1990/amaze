@@ -1,7 +1,7 @@
-# versa - FrontierExplorer System Overview
+# versa - Versa System Overview
 
 ## Executive Summary
-FrontierExplorer is a dynamic code architecture exploration system implementing frontier-based reverse engineering with AI agent coordination. The system uses confidence-driven exploration to systematically understand codebases, maintaining incremental knowledge through structured memory patterns.
+Versa is a dynamic code architecture exploration system implementing frontier-based reverse engineering with AI agent coordination. The system uses confidence-driven exploration to systematically understand codebases, maintaining incremental knowledge through structured memory patterns.
 
 ## Architecture Overview
 - **Type**: Analysis Framework & Documentation System
@@ -30,11 +30,11 @@ FrontierExplorer is a dynamic code architecture exploration system implementing 
 
 ### README.md (150+ lines)
 **Role**: System overview and user documentation
-- Explains FrontierExplorer philosophy and agent coordination
+- Explains Versa philosophy and agent coordination
 - Documents command interfaces and exploration strategies
 - Provides usage examples and configuration guidance
 
-### prompts/workflows/simple_project_analyzer.md (100+ lines)
+### .versa/prompts/workflows/simple_project_analyzer.md (100+ lines)
 **Role**: Small project analysis template
 - Direct output generation for tiny/small projects
 - Automatic scale assessment and template selection

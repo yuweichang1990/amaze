@@ -114,7 +114,7 @@ Always end output with frontier suggestions:
 - Balance detail with readability
 
 ### For Large Projects (>20 files, >5000 lines)
-- Full FrontierExplorer workflow with memory persistence
+- Full Versa workflow with memory persistence
 - Multi-phase analysis with frontier management
 - Comprehensive documentation generation
 

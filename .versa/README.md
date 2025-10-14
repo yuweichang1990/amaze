@@ -1,10 +1,10 @@
-# FrontierExplorer - Dynamic Code Architecture Exploration
+# Versa - Dynamic Code Architecture Exploration
 
-A Frontier-Based reverse engineering system that incrementally explores codebases through AI agent coordination. Unlike traditional fixed-round approaches, FrontierExplorer uses confidence-driven exploration with intelligent frontier management.
+A Frontier-Based reverse engineering system that incrementally explores codebases through AI agent coordination. Unlike traditional fixed-round approaches, Versa uses confidence-driven exploration with intelligent frontier management.
 
 ## Overview
 
-FrontierExplorer replaces rigid R0→R1→R2 rounds with a dynamic exploration framework:
+Versa replaces rigid R0→R1→R2 rounds with a dynamic exploration framework:
 
 - **🗺️ Frontier-Based**: Like exploring an unknown territory, systematically mapping unexplored regions
 - **🎯 Confidence-Driven**: Prioritizing high-value, low-confidence areas for maximum insight efficiency
@@ -203,7 +203,7 @@ specifications/memory/
 
 ## Use Cases
 
-### ✅ **When to Use FrontierExplorer**
+### ✅ **When to Use Versa**
 
 - Understanding complex legacy codebases with unclear architecture
 - Onboarding new team members with targeted knowledge building
@@ -277,11 +277,11 @@ specifications/
 
 > **"Explore intelligently, document incrementally, understand deeply"**
 
-FrontierExplorer treats codebase understanding as a systematic exploration problem rather than a documentation exercise. By maintaining clear frontiers between known and unknown territory, preserving confidence levels, and enabling strategic human-AI collaboration, it provides a framework for truly mastering complex systems.
+Versa treats codebase understanding as a systematic exploration problem rather than a documentation exercise. By maintaining clear frontiers between known and unknown territory, preserving confidence levels, and enabling strategic human-AI collaboration, it provides a framework for truly mastering complex systems.
 
 ---
 
 **Ready to start?**
 
 ```
-/reverse-analyze --round 0 --repo .
+/reverse-analyze --workflow bootstrap --repo .
