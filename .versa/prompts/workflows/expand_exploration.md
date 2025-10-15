@@ -52,6 +52,13 @@ Load all memory elements:
 └── frontier/            # Current exploration state
 ```
 
+### Incremental Artifacts Generation (Small Convergence)
+Each expand generates artifacts for progressive value:
+- system_architecture.md
+- component_relationships.md
+- code_contracts.md
+- recommendations.md
+
 ### Artifact Generation Rules
 
 #### 📋 system_architecture.md

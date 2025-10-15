@@ -40,10 +40,7 @@ Execute systematic code architecture exploration that goes beyond traditional st
   - `RiskFocused`: Address security-critical and high-risk areas
 
 ### TARGETING PARAMETERS
-- `--target <element>`: Focus exploration on specific element
-  - File patterns: `"pkg/auth"` (explore auth package)
-  - Component IDs: `"SERVICE_USER_001"` (specific service component)
-  - Module paths: `"api/routes.go"` (specific file)
+- `--target <element>`: Focus exploration on specific element (integrated into workflow logic)
 
 ### FRONTIER PARAMETERS
 - `--resume <state_file>`: Continue from saved exploration state
@@ -55,10 +52,7 @@ Execute systematic code architecture exploration that goes beyond traditional st
   - Higher values = more conservative, reliable findings
   - Lower values = broader exploration coverage
 
-- `--depth <shallow|medium|deep>`: Analysis depth level
-  - `shallow`: Boundary mapping only (fast, high-level)
-  - `medium`: Component relationships (balanced)
-  - `deep`: Implementation details and contracts (slow, detailed)
+- `--quality <draft|standard|thorough>`: Unified quality control parameter
 
 
 
@@ -96,8 +90,8 @@ Execute systematic code architecture exploration that goes beyond traditional st
 
 ### TARGETED ANALYSIS
 ```bash
-# Analyze specific component deeply
-/reverse-analyze --agent explorer --target "pkg/auth" --depth deep --repo ./backend
+# Analyze specific component with standard quality
+/reverse-analyze --agent explorer --target "pkg/auth" --quality standard --repo ./backend
 
 # Focus on security-critical areas
 /reverse-analyze --strategy RiskFocused --target "authentication,middleware" --repo ./app
@@ -126,10 +120,7 @@ Execute systematic code architecture exploration that goes beyond traditional st
 - **PriorityBased**: When specific components need deep understanding or have high business value
 - **RiskFocused**: When security, reliability, or operational risks need immediate attention
 
-### DEPTH ADAPTATION
-- **Shallow**: Initial discovery, high-level architecture mapping
-- **Medium**: Default depth for balanced analysis and understanding
-- **Deep**: Detailed implementation analysis, contract verification, performance-related discoveries
+### QUALITY ASSURANCE
 
 ### QUALITY ASSURANCE
 - **Confidence Validation**: All high-confidence claims (>0.8) must have multiple evidence sources
@@ -181,7 +172,7 @@ specifications/artifacts/
 ### COMMON ISSUES
 - **Template Not Found**: Ensure `../prompts/` directory structure is intact
 - **Memory Corruption**: Use `--repo` parameter for clean slate or diagnose state files
-- **Timeout Exceeded**: Reduce `--depth` or increase `--timebox` for next session
+- **Timeout Exceeded**: Adjust `--quality` level or increase `--timebox` for next session
 
 ### RECOVERY STRATEGIES
 - **Interrupted Session**: Use `--resume` with last successful state file
@@ -189,7 +180,8 @@ specifications/artifacts/
 - **Scope Too Large**: Use targeting parameters to focus analysis scope
 
 ### FALLBACK MODES
-- **Simple Mode**: Use `--depth shallow` for basic structural mapping
+- **Draft Mode**: Use `--quality draft` for fast overview
+- **Thorough Mode**: Use `--quality thorough` for deep analysis
 - **Conservative Mode**: Increase `--confidence-threshold` to avoid unreliable discoveries
 
 ## Integration Points

@@ -4,12 +4,13 @@ A Frontier-Based reverse engineering system that incrementally explores codebase
 
 ## Overview
 
-Versa replaces rigid R0→R1→R2 rounds with a dynamic exploration framework:
+Versa is a dynamic exploration framework:
 
 - **🗺️ Frontier-Based**: Like exploring an unknown territory, systematically mapping unexplored regions
 - **🎯 Confidence-Driven**: Prioritizing high-value, low-confidence areas for maximum insight efficiency
 - **🤖 Agent Coordination**: Explorer→Reflector→Curator workflow with incremental memory building
 - **📊 Memory System**: Structured knowledge accumulation without context collapse
+- **🔄 Hybrid Convergence**: Small convergence (expand) + final converge for progressive value and final quality assurance
 
 ## Core Architecture
 
@@ -129,10 +130,32 @@ specifications/memory/
 - **Priority**: Focus on high-importance areas with clear value propositions
 - **Risk**: Address high-risk components that could cause system failures
 
-### Adaptive Depth Control
-- **Shallow**: Boundary mapping and interface discovery
-- **Medium**: Component relationships and data flows
-- **Deep**: Implementation details and contract verification
+### Convergence Process
+Versa implements a hybrid approach combining incremental artifacts with final validation:
+
+- **Small Convergence (expand)**: Each `--workflow expand` generates artifacts for immediate value
+- **Final Convergence (converge)**: Resolves conflicts and produces authoritative documentation
+- **Workflow vs Agent**: Complete orchestrated workflows vs individual agent execution
+
+### Parameter Design Philosophy
+#### Workflow vs Agent Parameters
+- **`--workflow`**: Complete agent orchestration flow (Explorer→Reflector→Curator)
+  - `bootstrap`: Initial system discovery, creates foundation frontier
+  - `expand`: Continue exploration + generate artifacts (small convergence)
+  - `converge`: Final validation and global optimization
+
+- **`--agent`**: Invoke specific agent role individually
+  - `explorer`: Pure discovery, no quality assessment or integration
+  - `reflector`: Pure evaluation of existing findings, no new exploration
+  - `curator`: Pure integration and frontier management
+
+When using `--workflow`, system handles complete coordination logic automatically. `--agent` is suitable for fine-grained control or debugging scenarios.
+
+#### Quality Control Integration
+- **`--quality`**: Unified quality control parameter consolidating multiple settings
+  - `draft`: Quick overview (fast, low confidence)
+  - `standard`: Balanced analysis (default)
+  - `thorough`: Deep analysis (slow, high quality)
 
 ## Command Reference
 
@@ -145,10 +168,13 @@ specifications/memory/
 # Continue exploration with frontier management
 /reverse-analyze --workflow expand
 
+# Final convergence with conflict resolution
+/reverse-analyze --workflow converge
+
 # Direct agent invocation
 /reverse-analyze --agent explorer --target "api/routes.go"
 /reverse-analyze --agent reflector --target "USER_SERVICE_001"
-/reverse-analyze --agent curator --action "integrate_session"
+/reverse-analyze --agent curator
 
 # Resume interrupted exploration
 /reverse-analyze --resume "specifications/memory/frontier/active_frontier.md"
@@ -162,7 +188,7 @@ specifications/memory/
 | `--agent` | Specific agent role | auto | `--agent explorer` |
 | `--target` | Focus target | auto | `--target "auth_service"` |
 | `--strategy` | Exploration strategy | auto | `--strategy RiskFocused` |
-| `--depth` | Analysis depth | adaptive | `--depth medium` |
+| `--quality` | Unified quality control | standard | `--quality thorough` |
 | `--resume` | Continue from state | - | `--resume "path/to/state.md"` |
 | `--confidence-threshold` | Min confidence filter | 0.6 | `--confidence-threshold 0.8` |
 
@@ -281,7 +307,16 @@ Versa treats codebase understanding as a systematic exploration problem rather t
 
 ---
 
+## Version Evolution
+
+### Parameter Integration (Current Version)
+- **Removed** `--depth`: Replaced by strategy-determined adaptive depth and `--quality` parameter
+- **Added** `--quality`: Consolidates multiple quality controls into single parameter
+- **Integrated** `--strategy` & `--target`: Now part of workflow logic for cleaner commands
+- **Enhanced** `--workflow converge`: Hybrid small convergence (expand) + final convergence pattern
+- **Clarified** `--workflow` vs `--agent`: Complete orchestration vs individual agent execution
+
 **Ready to start?**
 
 ```
-/reverse-analyze.md --workflow bootstrap --repo .
+/reverse-analyze --workflow bootstrap --repo .
