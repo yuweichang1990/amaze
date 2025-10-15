@@ -53,7 +53,7 @@ Defined in: `workflows/reverse-analyze.md`
 
 - `--workflow <type>`: Complete agent orchestrations
   - `bootstrap`: Initial system skeleton (Explorer→Reflector→Curator)
-  - `expand`: Continue from frontier state
+  - `expand`: Continue from frontier state + **generate artifacts** (Explorer→Reflector→Curator→Artifact Generation)
   - `converge`: Final validation and documentation
 
 - `--agent <role>`: Direct single-agent execution

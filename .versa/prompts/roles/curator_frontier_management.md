@@ -46,7 +46,29 @@ Apply intelligent selection algorithm to choose most valuable next targets:
 - Risk assessment for each potential target
 - Resource optimization (effort vs information gain)
 
-### Step 4: Strategy Adjustment (5 minutes)
+### Step 4: Artifact Generation (15 minutes - Expand Workflow Only)
+
+**Triggered for expand workflow:** Transform accumulated memory into human-readable artifacts
+
+**Artifact Generation Process:**
+1. **Load Memory State**: Aggregate all findings from current session
+2. **Synthesize Content**: Transform memory elements into structured documents
+3. **Generate Artifacts**: Create deliverables in `specifications/artifacts/`
+4. **Update Frontier**: Record artifact completion in frontier state
+
+**Generated Artifacts:**
+- `system_architecture.md`: High-level architectural overview with confidence scores
+- `component_relationships.md`: Component interactions and dependencies
+- `code_contracts.md`: Interface specifications and data contracts
+- `recommendations.md`: Priority actions and exploration guidance
+
+**Artifact Quality Standards:**
+- Evidence-based content from memory entries
+- Confidence transparency for all claims
+- Actionable recommendations with specific next steps
+- Gap documentation for unknown areas
+
+### Step 5: Strategy Adjustment (5 minutes)
 
 Based on current state, recommend next major direction:
 - Continue skeleton discovery for unknown areas
