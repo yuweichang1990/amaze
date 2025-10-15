@@ -32,13 +32,6 @@ Execute systematic code architecture exploration that goes beyond traditional st
   - `reflector`: Assess confidence levels and identify knowledge gaps
   - `curator`: Integrate findings and manage exploration frontier
 
-### STRATEGY PARAMETERS
-- `--strategy <approach>`: Exploration strategy selection
-  - `Bootstrap`: Start from system boundaries and entry points
-  - `CoverageDriven`: Fill gaps where confidence is uneven
-  - `PriorityBased`: Focus on high-impact, unclear components
-  - `RiskFocused`: Address security-critical and high-risk areas
-
 ### TARGETING PARAMETERS
 - `--target <element>`: Focus exploration on specific element (integrated into workflow logic)
 
@@ -93,11 +86,11 @@ Execute systematic code architecture exploration that goes beyond traditional st
 # Analyze specific component with standard quality
 /reverse-analyze --agent explorer --target "pkg/auth" --quality standard --repo ./backend
 
-# Focus on security-critical areas
-/reverse-analyze --strategy RiskFocused --target "authentication,middleware" --repo ./app
+# Focus on security-critical areas with high confidence threshold
+/reverse-analyze --agent explorer --target "authentication,middleware" --confidence-threshold 0.9 --repo ./app
 
-# Coverage-driven gap filling
-/reverse-analyze --strategy CoverageDriven --confidence-threshold 0.8 --repo ./system
+# Comprehensive analysis with thorough quality
+/reverse-analyze --agent reflector --target "pkg/payment" --quality thorough --repo ./system
 ```
 
 ### ADVANCED CONFIGURATIONS
@@ -108,19 +101,11 @@ Execute systematic code architecture exploration that goes beyond traditional st
 # Large codebase with resource limits
 /reverse-analyze --file-limit 5000 --exclude "node_modules/**,dist/**,test/**" --workflow bootstrap --repo ./monorepo
 
-# Incremental development analysis
-/reverse-analyze --strategy PriorityBased --target "pkg/new-feature" --confidence-threshold 0.9 --repo ./product
+# Deep analysis with high confidence requirement
+/reverse-analyze --agent curator --target "pkg/new-feature" --confidence-threshold 0.9 --repo ./product
 ```
 
 ## Behavior Guidelines
-
-### EXPLORATION STRATEGY SELECTION
-- **Bootstrap**: When knowledge base is empty or very sparse (<5 discovered elements)
-- **CoverageDriven**: When overall confidence distribution is highly uneven (<60% average confidence)
-- **PriorityBased**: When specific components need deep understanding or have high business value
-- **RiskFocused**: When security, reliability, or operational risks need immediate attention
-
-### QUALITY ASSURANCE
 
 ### QUALITY ASSURANCE
 - **Confidence Validation**: All high-confidence claims (>0.8) must have multiple evidence sources
