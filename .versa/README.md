@@ -72,19 +72,19 @@ System continuously:
 
 Choose the right workflow based on your project scale:
 
-### 📱 Small Projects (< 3k lines)
+### 📱 Small Projects
 **Recommended:** Use `--workflow bootstrap` for simple projects
 ```bash
 /reverse-analyze --workflow bootstrap --repo ./small-app
 ```
 
-### 🏢 Medium Projects (5k - 25k lines)
+### 🏢 Medium Projects
 **Recommended:** Use `--workflow single-pass` for comprehensive one-shot analysis
 ```bash
 /reverse-analyze --workflow single-pass --repo ./medium-app
 ```
 
-### 🏗️ Large Projects (> 25k lines)
+### 🏗️ Large Projects
 **Recommended:** Use `bootstrap + expand` for manageable incremental sessions
 ```bash
 /reverse-analyze --workflow bootstrap --repo ./large-system

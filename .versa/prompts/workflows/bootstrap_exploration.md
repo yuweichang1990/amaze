@@ -4,15 +4,10 @@ Coordinate initial exploration for new repositories. Orchestrate Explorer, Refle
 
 ## Workflow Phases
 
-### Phase 1: Initial Exploration (Scale-dependent)
+### Phase 1: Initial Exploration
 **Agent: Explorer**
 
-#### For Small Projects (< 5 files)
-- Use scale-appropriate output format
-- Generate immediate project overview
-- Skip complex memory system for rapid understanding
-
-#### For Medium/Large Projects (≥ 5 files)
+#### For Medium/Large Project
 - Execute comprehensive skeleton discovery using `explorer_skeleton_discovery.md`
 - Target: Complete system boundary and structure mapping
 - Deliverable: Structured skeleton element entries

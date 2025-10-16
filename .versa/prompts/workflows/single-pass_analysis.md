@@ -46,7 +46,6 @@ Single output file capturing all architectural discoveries:
 ---
 analysis_session: "single_pass_[timestamp]"
 project_scale: "medium"
-total_lines: 15000
 analysis_duration: "65 minutes"
 collected_at: "timestamp"
 
@@ -129,7 +128,7 @@ recommendations:
 
 ### Efficiency Metrics
 - **⚡ Context Window Utilization**: Complete analysis within single AI context
-- **⏱️ Total Analysis Time**: 45-75 minutes for 5k-25k line projects
+- **⏱️ Total Analysis Time**: 45-75 minutes for medium-scale projects
 - **📊 Output Completeness**: All four artifacts generated in single pass
 - **🎯 Accuracy**: 90%+ confidence on critical architectural elements
 
