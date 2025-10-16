@@ -35,7 +35,7 @@ Perform comprehensive one-shot architecture analysis for medium-scale projects (
 3. **Component Relationship Mapping** - Create detailed interaction diagrams and data flows
 4. **Implementation Guide** - Document interfaces, contracts, and development patterns
 
-**Key Output:** Production-ready documentation preserving key discoveries in seven specialized artifacts
+**Key Output:** Seven specialized artifacts - requirements, system scope, architecture, patterns, relationships, contracts, and recommendations
 
 ## Memory System Optimization
 
