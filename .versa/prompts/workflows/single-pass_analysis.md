@@ -35,7 +35,7 @@ Perform comprehensive one-shot architecture analysis for medium-scale projects (
 3. **Component Relationship Mapping** - Create detailed interaction diagrams and data flows
 4. **Implementation Guide** - Document interfaces, contracts, and development patterns
 
-**Key Output:** Production-ready documentation including business requirements, technical specification, and implementation guidance
+**Key Output:** Production-ready documentation preserving key discoveries in seven specialized artifacts
 
 ## Memory System Optimization
 
@@ -129,7 +129,7 @@ recommendations:
 ### Efficiency Metrics
 - **⚡ Context Window Utilization**: Complete analysis within single AI context
 - **⏱️ Total Analysis Time**: 45-75 minutes for medium-scale projects
-- **📊 Output Completeness**: All four artifacts generated in single pass
+- **📊 Output Completeness**: All seven artifacts generated in single pass
 - **🎯 Accuracy**: 90%+ confidence on critical architectural elements
 
 ### Quality Assurance
@@ -144,11 +144,14 @@ recommendations:
 ```
 specifications/
 ├── single_pass_collection.md      # Raw architectural data
-├── artifacts/                     # Production-ready documentation
-│   ├── system_architecture.md     # Comprehensive system overview
-│   ├── component_relationships.md # Detailed interaction maps
-│   ├── code_contracts.md          # Interface specifications
-│   └── recommendations.md         # Development guidance
+├── artifacts/                      # Production-ready documentation
+│   ├── requirements.md             # Functional/non-functional requirements & acceptance criteria
+│   ├── system_scope.md             # System boundaries, purpose, and business context
+│   ├── system_architecture.md      # Comprehensive architectural overview & design decisions
+│   ├── architecture_patterns.md    # Identified design patterns and frameworks
+│   ├── component_relationships.md  # Detailed interaction diagrams and data flows
+│   ├── code_contracts.md          # Interface specifications and contracts
+│   └── recommendations.md         # Development guidance and next steps
 └── metadata.json                  # Analysis session information
 ```
 
