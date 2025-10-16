@@ -68,6 +68,35 @@ System continuously:
 - Updates confidence levels and frontier boundaries
 - Adapts strategy based on emerging patterns
 
+## Workflow Selection Guide
+
+Choose the right workflow based on your project scale:
+
+### 📱 Small Projects (< 3k lines)
+**Recommended:** Use `--workflow bootstrap` for simple projects
+```bash
+/reverse-analyze --workflow bootstrap --repo ./small-app
+```
+
+### 🏢 Medium Projects (5k - 25k lines)
+**Recommended:** Use `--workflow single-pass` for comprehensive one-shot analysis
+```bash
+/reverse-analyze --workflow single-pass --repo ./medium-app
+```
+
+### 🏗️ Large Projects (> 25k lines)
+**Recommended:** Use `bootstrap + expand` for manageable incremental sessions
+```bash
+/reverse-analyze --workflow bootstrap --repo ./large-system
+/reverse-analyze --workflow expand  # Repeat as needed
+```
+
+### 🔬 Complex Domains
+**Recommended:** Use incremental approach for phased deep understanding
+```bash
+/reverse-analyze --workflow expand --repo ./complex-domain
+```
+
 ## Starting Exploration
 
 ### Basic Bootstrap
@@ -124,11 +153,8 @@ specifications/memory/
 
 ## Exploration Strategies
 
-### Automatic Strategy Selection
-- **Bootstrap**: Initial discovery when knowledge is sparse
-- **Coverage**: Fill understanding gaps when confidence distribution is uneven
-- **Priority**: Focus on high-importance areas with clear value propositions
-- **Risk**: Address high-risk components that could cause system failures
+### Intelligent Exploration Strategies
+The system automatically selects optimal exploration strategies based on workflow context and current system state. Strategies adapt dynamically to maximize discovery efficiency and knowledge quality.
 
 ### Convergence Process
 Versa implements a hybrid approach combining incremental artifacts with final validation:
@@ -187,8 +213,8 @@ When using `--workflow`, system handles complete coordination logic automaticall
 | `--workflow` | Complete workflows | auto | `--workflow bootstrap` |
 | `--agent` | Specific agent role | auto | `--agent explorer` |
 | `--target` | Focus target | auto | `--target "auth_service"` |
-| `--strategy` | Exploration strategy | auto | `--strategy RiskFocused` |
-| `--quality` | Unified quality control | standard | `--quality thorough` |
+| `--resume` | Continue from state | - | `--resume "path/to/state.md"` |
+| `--resume` | Continue from state | - | `--resume "path/to/state.md"` |
 | `--resume` | Continue from state | - | `--resume "path/to/state.md"` |
 | `--confidence-threshold` | Min confidence filter | 0.6 | `--confidence-threshold 0.8` |
 

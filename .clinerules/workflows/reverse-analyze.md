@@ -15,7 +15,7 @@ Execute systematic code architecture exploration that goes beyond traditional st
 - **Three-Agent Coordination**: Explorer→Reflector→Curator workflow for quality assurance
 - **Incremental Memory**: Build understanding progressively without context collapse
 - **Confidence Scoring**: Prioritize exploration based on uncertainty and importance
-- **Strategy Selection**: Automatically choose optimal exploration approaches
+- **Intelligent Workflow Orchestration**: Automatic strategy selection based on context
 
 ## Parameters
 
@@ -24,6 +24,7 @@ Execute systematic code architecture exploration that goes beyond traditional st
 - `--workflow <type>`: Complete workflow execution
   - `bootstrap`: Initial system skeleton discovery (Explorer→Reflector→Curator)
   - `expand`: Continue exploration from current frontier state
+  - `single-pass`: Comprehensive one-shot analysis for medium projects (5k-25k lines)
   - `converge`: Final validation and comprehensive documentation
 
 ### AGENT EXECUTION PARAMETERS
@@ -40,12 +41,7 @@ Execute systematic code architecture exploration that goes beyond traditional st
   - Default: `specifications/memory/frontier/active_frontier.md`
   - Allows resuming interrupted analysis sessions
 
-### QUALITY CONTROL PARAMETERS
-- `--confidence-threshold <0.0-1.0>`: Minimum confidence filter (default: 0.6)
-  - Higher values = more conservative, reliable findings
-  - Lower values = broader exploration coverage
 
-- `--quality <draft|standard|thorough>`: Unified quality control parameter
 
 
 
@@ -61,6 +57,9 @@ Execute systematic code architecture exploration that goes beyond traditional st
 ```bash
 # Bootstrap analysis for new codebase
 /reverse-analyze --workflow bootstrap --repo ./my-project
+
+# Single-pass analysis for medium-sized projects (5k-25k lines)
+/reverse-analyze --workflow single-pass --repo ./medium-app
 
 # Resume interrupted exploration
 /reverse-analyze --workflow expand --resume "specifications/memory/frontier/state.backup.md"
@@ -83,14 +82,14 @@ Execute systematic code architecture exploration that goes beyond traditional st
 
 ### TARGETED ANALYSIS
 ```bash
-# Analyze specific component with standard quality
-/reverse-analyze --agent explorer --target "pkg/auth" --quality standard --repo ./backend
+# Analyze specific component
+/reverse-analyze --agent explorer --target "pkg/auth" --repo ./backend
 
-# Focus on security-critical areas with high confidence threshold
-/reverse-analyze --agent explorer --target "authentication,middleware" --confidence-threshold 0.9 --repo ./app
+# Focus on security-critical areas
+/reverse-analyze --agent explorer --target "authentication,middleware" --repo ./app
 
-# Comprehensive analysis with thorough quality
-/reverse-analyze --agent reflector --target "pkg/payment" --quality thorough --repo ./system
+# Assess payment service findings
+/reverse-analyze --agent reflector --target "pkg/payment" --repo ./system
 ```
 
 ### ADVANCED CONFIGURATIONS
@@ -101,8 +100,8 @@ Execute systematic code architecture exploration that goes beyond traditional st
 # Large codebase with resource limits
 /reverse-analyze --file-limit 5000 --exclude "node_modules/**,dist/**,test/**" --workflow bootstrap --repo ./monorepo
 
-# Deep analysis with high confidence requirement
-/reverse-analyze --agent curator --target "pkg/new-feature" --confidence-threshold 0.9 --repo ./product
+# Advanced memory analysis
+/reverse-analyze --agent curator --target "pkg/new-feature" --repo ./product
 ```
 
 ## Behavior Guidelines

@@ -1,12 +1,6 @@
 # Expand Exploration Workflow
 
-## Overview
-This workflow continues exploration from existing frontier state, synthesizing accumulated memory into comprehensive artifacts. It extends bootstrap findings with deeper analysis and transforms raw memory into final deliverables.
-
-## Workflow Context
-**Triggered by:** `--workflow expand` command
-**Input:** Existing memory state (`specifications/memory/`) and active frontier
-**Goal:** Transform memory accumulation into human-readable artifacts
+Continue exploration from frontier state, synthesize memory into artifacts. Extend bootstrap findings with deeper analysis.
 
 ## Workflow Phases
 
@@ -41,7 +35,14 @@ Transform memory into final artifacts:
 - Generate artifacts in `specifications/artifacts/` directory
 - Update exploration frontier for next session
 
-## Enhanced Curator Synthesis Phase
+## Intelligent Strategy Selection
+
+**Automatic Strategy**: Adapts based on current frontier state and confidence distribution
+- High uncertainty areas → Priority-based exploration
+- Uneven confidence → Coverage-driven filling
+- Critical path gaps → Risk-focused validation
+
+## Artifact Generation Phase
 
 ### Memory Aggregation
 ```

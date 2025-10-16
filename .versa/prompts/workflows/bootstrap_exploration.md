@@ -1,45 +1,21 @@
 # Bootstrap System Exploration Workflow
 
-## Overview
-This workflow coordinates the initial exploration session where no prior knowledge exists. It orchestrates Explorer, Reflector, and Curator agents to establish the foundational understanding of the codebase.
-
-## Project Scale Assessment (First Step)
-
-### Automatic Scale Determination
-**Before any exploration begins:**
-1. Count total source files in target directory
-2. Estimate total lines of code across files
-3. Assess technology stack complexity
-4. Evaluate domain/business logic complexity
-
-### Strategy Selection Matrix
-| Scale | Criteria | Approach | Output |
-|-------|----------|----------|--------|
-| Tiny | <3 files, <100 loc | Direct summary | README-style report |
-| Small | <5 files, <500 loc | Simple analysis | Summary + basic component docs |
-| Medium | 5-20 files, 500-5000 loc | Standard workflow | Full memory + reports |
-| Large | >20 files, >5000 loc | Complex workflow | Multi-phase analysis |
-
-### Scale-Adaptive Time Allocation
-- Tiny: 2-5 minutes
-- Small: 5-15 minutes
-- Medium: 15-45 minutes
-- Large: 45-120 minutes
+Coordinate initial exploration for new repositories. Orchestrate Explorer, Reflector, and Curator to establish foundational system understanding.
 
 ## Workflow Phases
 
 ### Phase 1: Initial Exploration (Scale-dependent)
 **Agent: Explorer**
 
-#### For Small Projects (strategy selection based on scale assessment above)
-- Use `simple_project_analyzer.md` template
-- Generate immediate project overview report
+#### For Small Projects (< 5 files)
+- Use scale-appropriate output format
+- Generate immediate project overview
 - Skip complex memory system for rapid understanding
 
-#### For Medium/Large Projects (standard workflow)
-- Execute skeleton discovery using `explorer_skeleton_discovery.md`
-- Target: Complete system skeleton mapping
-- Deliverable: Multiple skeleton element entries
+#### For Medium/Large Projects (≥ 5 files)
+- Execute comprehensive skeleton discovery using `explorer_skeleton_discovery.md`
+- Target: Complete system boundary and structure mapping
+- Deliverable: Structured skeleton element entries
 
 **Success Criteria:**
 - Multiple entrypoints identified
@@ -58,7 +34,6 @@ This workflow coordinates the initial exploration session where no prior knowled
 - All elements have confidence assessments
 - Critical gaps identified
 - Risk levels determined
-- Next actions prioritized
 
 ### Phase 3: Integration & Planning (10 minutes)
 **Agent: Curator**
